@@ -72,7 +72,6 @@
 
     <!-- Page Content -->
     <div class="container">
-
       <!-- Page Heading -->
       <h1 class="my-4">후기 게시판
         <!--<small>Secondary Text</small>-->
@@ -86,28 +85,26 @@
                 </div>
                 <div class="card-block">
 
-                  <form class="form-horizontal">
-                    <div class="form-group row">
-                      <label class="col-sm-2 form-control-label">공연장 이름</label>
-                      <div class="col-sm-10 select">
-                        <select name="account" class="form-control">
-                          <option>세종문화회관 - 세종대극장</option>
-                          <option>충무아트센터 - 대극장</option>
-                          <option>예술의 전당 - 자유소극장</option>
-                          <option>샤롯데씨어터</option>
-                          <option>국립극장 - 해오름극장</option>
-                        </select>
+                    <form class="form-horizontal" action="write.php" method="post">
+                      <div class="form-group row">
+                        <label class="col-sm-2 form-control-label">공연장 이름</label>
+                        <div class="col-sm-10 select">
+                          <select name="audi_name" class="form-control">
+                            <option value="1">세종문화회관 - 세종대극장</option>
+                            <option value="2">충무아트센터 - 대극장</option>
+                            <option value="3">예술의 전당 - 자유소극장</option>
+                            <option value="4">샤롯데씨어터</option>
+                            <option value="5">국립극장 - 해오름극장</option>
+                          </select>
+                        </div>
                       </div>
-                    </div>
-
-                    <form class="form-horizontal">
                       <div class="form-group row">
                         <label class="col-sm-2 form-control-label">층</label>
                         <div class="col-sm-10 select">
-                          <select name="account" class="form-control">
-                            <option>1층</option>
-                            <option>2층</option>
-                            <option>3층</option>
+                          <select name="floor" class="form-control">
+                            <option value="1">1층</option>
+                            <option value="2">2층</option>
+                            <option value="3">3층</option>
                           </select>
                         </div>
                       </div>
@@ -116,7 +113,7 @@
                       <div class="form-group row">
                         <label class="col-sm-2 form-control-label">좌석 번호</label>
                         <div class="col-sm-10">
-                          <input placeholder="A10" class="form-control" type="text">
+                          <input placeholder="ex) A10" id="seat_code" name="seat_code" class="form-control" type="text">
                         </div>
                       </div>
 
@@ -125,7 +122,7 @@
                       <label class="col-sm-2 form-control-label">한줄평</label>
                       <div class="col-sm-10">
                         <span class="help-block-none">한줄평을 40자 이내로 적어주세요.</span>
-                        <textarea class="form-control" rows="1" id="textArea"></textarea>
+                        <textarea class="form-control" rows="1" id="title" name="title"></textarea>
                       </div>
                     </div>
 
@@ -134,7 +131,7 @@
                       <label class="col-sm-2 form-control-label">본문</label>
                       <div class="col-sm-10">
                         <span class="help-block-none">공연장과 자석에 대한 의견을 300자 이내로 자유롭게 적어주세요.</span>
-                        <textarea class="form-control" rows="5" id="textArea"></textarea>
+                        <textarea class="form-control" rows="5" id="content" name="content"></textarea>
                       </div>
                     </div>
 
@@ -144,17 +141,17 @@
                       <div class="col-sm-10">
                         <span class="help-block-none">1. (무대와의 거리) 아티스트 표정이 잘 보이시나요?</span>
                           <div class="form-group">
-                              <select multiple="" class="form-control">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option>10</option>
+                              <select name="distance_score" multiple="" class="form-control">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
                               </select>
                             </div>
                           </div>
@@ -166,17 +163,17 @@
                         <div class="col-sm-10">
                           <span class="help-block-none">2. (가격) 좌석이 가격대비 만족하셨나요?</span>
                             <div class="form-group">
-                                <select multiple="" class="form-control">
-                                  <option>1</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                  <option>5</option>
-                                  <option>6</option>
-                                  <option>7</option>
-                                  <option>8</option>
-                                  <option>9</option>
-                                  <option>10</option>
+                                <select name="cost_score" multiple="" class="form-control">
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
+                                  <option value="5">5</option>
+                                  <option value="6">6</option>
+                                  <option value="7">7</option>
+                                  <option value="8">8</option>
+                                  <option value="9">9</option>
+                                  <option value="10">10</option>
                                 </select>
                               </div>
                             </div>
@@ -188,21 +185,25 @@
                           <div class="col-sm-10">
                             <span class="help-block-none">3. (사운드) 소리가 균형있고, 풍부하게 들렸나요?</span>
                               <div class="form-group">
-                                  <select multiple="" class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                    <option>8</option>
-                                    <option>9</option>
-                                    <option>10</option>
+                                  <select name="sound_score" multiple="" class="form-control">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
                                   </select>
                                 </div>
                               </div>
                           </div>
+                          <P>
+                            <input type="submit" name="" class="btn btn-primary" value="저장하기">
+                          </P>
+                        </form>
                         </div>
                       </div>
                     </div>
