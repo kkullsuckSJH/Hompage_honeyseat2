@@ -1,6 +1,13 @@
+<?php
+  $conn = mysqli_connect("localhost", "root", "jih32952", "honeyseat", "3307");
+  if (!$conn) {
+    echo "connect error";
+  }
+  mysqli_select_db($conn, "honeyseat");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
 
     <meta charset="utf-8">
@@ -76,7 +83,7 @@
               <a class="nav-link" href="#">Services</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
+              <a class="nav-link" href="#">후기 작성하기</a>
             </li>
           </ul>
         </div>
@@ -235,35 +242,53 @@
 
 <br><br><br>
 
+
       <!--review board-->
       <div class="container">
 
         <table class="table table-hover" >
           <thead>
             <tr>
-              <th class="col-md-0.5">글번호</th>
-              <th class="col-md-1.5">공연장</th>
-              <th class="col-md-1.5">층</th>
-              <th class="col-md-1">좌석번호</th>
-              <th class="col-md-1.5">별점</th>
-              <th class="col-md-5">제목</th>
-              <th class="col-md-0.5">작성자</th>
-              <th class="col-md-1">날짜</th>
+              <th class="col-xs-0.5">글번호</th>
+              <th class="col-xs-1.5">공연장</th>
+              <th class="col-xs-0.5">층</th>
+              <th class="col-xs-0.5">좌석번호</th>
+              <th class="col-xs-0.5">별점</th>
+              <th class="col-xs-5.5">제목</th>
+              <th class="col-xs-1.5">작성자</th>
+              <th class="col-xs-1.5">날짜</th>
             </tr>
           </thead>
           <tbody>
+            <?php
+              $sql = "SELECT * FROM `review` ORDER BY `review_num` DESC;";
+              $result = mysqli_query($conn, $sql);
+              while ($row = mysqli_fetch_assoc($result)) {
+                # split date & time ..
+                // $split_date_time = explode(' ', "{$row['date']} ");
+                // $date = $split_date_time[0];
+                // $time = $split_date_time[1];
+                // if ($date == Date('Y-m-d')){
+                //   $row['date'] = $time;
+                // }
+                // else {
+                //   $row['date'] = $date;
+                // }
+             ?>
             <tr>
-              <td>1</td>
-              <td>세종문화회관</td>
-              <td>1층</td>
-              <td>A10</td>
-              <td>5</td>
-              <td>좋아요~</td>
-              <td>임수진</td>
-              <td>2017-10-12</td>
+              <td><?php echo $row['review_num'];?></td>
+              <td><?php echo $row['audi_name'];?></td>
+              <td><?php echo $row['floor'];?></td>
+              <td><?php echo $row['audi_seat_num'];?></td>
+              <td><?php echo $row['star'];?></td>
+              <td><?php echo $row['content'];?></td>
+              <td><?php echo $row['user_name'];?></td>
+              <td><?php echo $row['date'];?></td>
             </tr>
+          <?php } ?>
           </tbody>
         </table>
+          <a href="#" class="btn btn-primary">후기 작성하기</a>
 
         <hr/>
 
